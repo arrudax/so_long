@@ -1,0 +1,11 @@
+*.out
+*.o
+*.swp
+*.a
+.vscode/
+test_ft
+run_test
+*.txt
+build/
+.nfs*
+
