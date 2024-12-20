@@ -6,7 +6,7 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:42:22 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/20 11:54:35 by maanton2         ###   ########.org.br   */
+/*   Updated: 2024/12/20 16:29:39 by maanton2         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ typedef struct s_map
 {
 	char			*current_line;
 	struct s_map	*next_line;
-	int				width;
-	int				height;
-	char			**grid;
+	int				len_line;
 } t_map;
 
 typedef struct s_position
@@ -58,6 +56,7 @@ typedef struct s_render
 	t_map		*map;
 	t_player	*player;
 	t_camera	*camera;
+	char		**grid;
 } t_render;
 
 t_render	*ft_render_map(char *path_map);
