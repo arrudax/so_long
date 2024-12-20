@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-LIBFT_VERSION		:= 2.2.0
+LIBFT_VERSION		:= 2.3.0
 MLX_VERSION			:= 2.4.1
 CMAKE_VERSION		:= 3.16
  
@@ -46,7 +46,8 @@ LIBS				:= ./lib/libft/libft.a \
 
 SOURCE_FILES		+=$(addprefix $(SRC_MAIN), main.c)
 
-SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c)
+SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
+	ft_close_window.c)
  
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(BUILD_DIR)%.o)
 
@@ -81,7 +82,6 @@ define submodule_update_libft
 endef
  
 define submodule_update_mlx42
-	printf "$(PURPLE)Building library MLX42\n$(RESET)"
 	git submodule update --init --recursive >/dev/null 2>&1 || true
 	git submodule foreach -q --recursive \
 		'branch="$(git config -f $toplevel/.gitmodules submodule.MLX42)"; \
