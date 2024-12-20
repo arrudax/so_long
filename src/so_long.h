@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SO_LONG_H
-# define FT_SO_LONG_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "window.h"
 # include "libft.h"
+
+typedef struct s_game 
+{
+	mlx_t	*mlx;
+	void	*window;
+} t_game;
 
 #endif
