@@ -12,15 +12,11 @@
 
 #include "window.h"
 
-void	ft_create_window(mlx_t *mlx)
+void	ft_close_window(void *param)
 {
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "Arrudax_so_long", false);
-	if (!mlx)
-	{
-		puts(mlx_strerror(mlx_errno));
-		exit (EXIT_FAILURE);
-	}
-	mlx_loop_hook(mlx, ft_close_window, mlx);
-	mlx_loop(mlx);
+	mlx_t *mlx;
+
+	mlx = param;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
 }

@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
 
-void	ft_create_window(void);
+void	ft_create_window(mlx_t *mlx);
+void	ft_close_window(void *param);
 
 #endif
