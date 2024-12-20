@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_so_long.h"
+#include "so_long.h"
 
 int32_t main(void)
 {
+	t_game	game;
+
+	game.mlx = NULL;
+	game.window = NULL;
 	printf("%zu", ft_strlen("hello"));
-	ft_create_window();
+	ft_create_window(game.mlx);
     return (0);
 }
 
