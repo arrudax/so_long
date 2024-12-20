@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_window.c                                 :+:      :+:    :+:   */
+/*   ft_close_window.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:41:15 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/18 20:39:27 by maanton2         ###   ########.org.br   */
+/*   Updated: 2024/12/20 09:32:15 by maanton2         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 
-void	ft_close_window(void *param)
+void	ft_close_window(mlx_key_data_t key, t_game *game)
 {
-	mlx_t *mlx;
-
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
+	if (key.key == MLX_KEY_ESCAPE)
+	{
+		mlx_close_window(game->mlx);
+		return ;
+	}
+ 
 }

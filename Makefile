@@ -6,12 +6,12 @@
 #    By: maanton2 <maanton2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 05:19:48 by maanton2          #+#    #+#              #
-#    Updated: 2024/12/18 19:28:04 by maanton2         ###   ########.org.br    #
+#    Updated: 2024/12/20 11:05:53 by maanton2         ###   ########.org.br    #
 #                                                                              #
 # **************************************************************************** #
 
 LIBFT_VERSION		:= 2.3.0
-MLX_VERSION			:= 2.4.1
+MLX_VERSION			:= 2.3.3
 CMAKE_VERSION		:= 3.16
  
 # **************************************************************************** #
@@ -20,7 +20,12 @@ CMAKE_VERSION		:= 3.16
  
 SRC_MAIN			:= src/
 SRCS_WINDOW			:= src/window/
-INCS				:= includes/ lib/libft/includes lib/MLX42/include/ src/window
+SRCS_RENDER			:= src/render/
+INCS				:= includes/ \
+	lib/libft/includes \
+	lib/MLX42/include/ \
+	src/window \
+	src/render
 BUILD_DIR			:= build/
 MLX42_DIR			:= lib/MLX42/
 SRCS_LIBFT			:= lib/libft/
@@ -48,7 +53,9 @@ SOURCE_FILES		+=$(addprefix $(SRC_MAIN), main.c)
 
 SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
 	ft_close_window.c)
- 
+
+SOURCE_FILES		+=$(addprefix $(SRCS_RENDER), ft_render_map.c)
+
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(BUILD_DIR)%.o)
 
 OBJECT_FILES_BONUS	:= $(SOURCE_FILES_BONUS:%.c=$(BUILD_DIR)%.o)
