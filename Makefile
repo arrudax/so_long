@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-LIBFT_VERSION		:= 2.3.0
+LIBFT_VERSION		:= 2.5.0
 MLX_VERSION			:= 2.3.3
 CMAKE_VERSION		:= 3.16
  
@@ -22,7 +22,9 @@ SRC_MAIN			:= src/
 SRCS_WINDOW			:= src/window/
 SRCS_RENDER			:= src/render/
 INCS				:= includes/ \
-	lib/libft/includes \
+	lib/libft/libft/includes/ \
+	lib/libft/gnl/single_fd/ \
+	lib/libft/gnl/multiple_fd/ \
 	lib/MLX42/include/ \
 	src/window \
 	src/render
@@ -77,8 +79,8 @@ COMPILE_EXE			= $(CC) $(LDFLAGS) $(OBJECT_FILES) $(LDLIBS) -o $(NAME)
 #******************************************************************************#
  
 define submodule_update_libft
-	git submodule update --init --remote >/dev/null 2>&1 || true
-	git submodule foreach -q \
+	git submodule update --init --recursive --remote >/dev/null 2>&1 || true
+	git submodule foreach -q --recursive \
 		'branch="$(git config -f $toplevel/.gitmodules submodule.Libft)"; \
 		git pull origin main; \
 		git fetch; \
