@@ -14,6 +14,7 @@
 
 void	ft_close_window(mlx_key_data_t key, t_game *game)
 {
+	printf("%d\n", key.key);
 	if (key.key == MLX_KEY_ESCAPE)
 	{
 		mlx_close_window(game->mlx);
