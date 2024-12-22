@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	game.mlx = NULL;
-	game.render = ft_render_map(argv[1]);
+	game.render = ft_render(argv[1]);
 	ft_create_window(&game);
 	mlx_key_hook(game.mlx, (mlx_keyfunc)ft_close_window, &game);
 	mlx_loop(game.mlx);

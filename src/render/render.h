@@ -15,13 +15,10 @@
 
 # include "MLX42/MLX42.h"
 # include "window.h"
+# include "libft.h"
+# include "get_next_line.h"
 
-typedef struct s_map
-{
-	char			*current_line;
-	struct s_map	*next_line;
-	int				len_line;
-} t_map;
+# include <fcntl.h>
 
 typedef struct s_position
 {
@@ -31,7 +28,7 @@ typedef struct s_position
 
 typedef struct s_sprite
 {
-	mlx_image_t		*sprite;
+	mlx_texture_t	*sprite;
 	int				width;
 	int				height;
 	struct s_sprite	*next;
@@ -53,12 +50,19 @@ typedef struct s_camera
 
 typedef struct s_render
 {
-	t_map		*map;
+	t_list		*map;
 	t_player	*player;
 	t_camera	*camera;
-	char		**grid;
+	size_t			line;
+	size_t			column;
 } t_render;
 
-t_render	*ft_render_map(char *path_map);
+t_render	*ft_render(char *path_map);
+
+# define FLOOR '0'
+# define WALL '1'
+# define PLAYER 'P'
+# define COLL 'C'
+# define EXIT_DOOR 'E'
 
 #endif
