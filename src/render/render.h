@@ -28,10 +28,9 @@ typedef struct s_position
 
 typedef struct s_sprite
 {
-	mlx_texture_t	*sprite;
-	int				width;
-	int				height;
-	struct s_sprite	*next;
+	mlx_image_t		**sprite;
+	size_t			width;
+	size_t			height;
 } t_sprite;
 
 typedef struct s_player
@@ -53,12 +52,14 @@ typedef struct s_render
 	t_list		*map;
 	t_player	*player;
 	t_camera	*camera;
-	size_t			line;
-	size_t			column;
+	t_sprite	*assets;
+	size_t		len_line;
+	size_t		len_column;
 } t_render;
 
-t_render	*ft_render(char *path_map);
+t_render	*ft_render(char *path_map, mlx_t *mlx);
 
+# define TILE_SIZE 64
 # define FLOOR '0'
 # define WALL '1'
 # define PLAYER 'P'
