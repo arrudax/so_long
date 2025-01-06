@@ -6,7 +6,7 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:42:22 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/20 16:29:39 by maanton2         ###   ########.org.br   */
+/*   Updated: 2025/01/06 12:54:10 by maanton2         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_position
 
 typedef struct s_sprite
 {
-	mlx_image_t		**sprite;
+	mlx_image_t		*sprite[10];
 	size_t			width;
 	size_t			height;
 } t_sprite;
@@ -49,7 +49,7 @@ typedef struct s_camera
 
 typedef struct s_render
 {
-	t_list		*map;
+	char		**map;
 	t_player	*player;
 	t_camera	*camera;
 	t_sprite	*assets;

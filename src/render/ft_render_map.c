@@ -3,136 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   ft_render_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maanton2 <maanton2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:19:09 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/20 16:29:39 by maanton2         ###   ########.org.br   */
+/*   Updated: 2025/01/06 17:03:22 by maanton2         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 //	t_x x = (t_X) {0,0,{0,0}};
 
-int	ft_read_map_to_list(t_list **map, char *path_map, size_t *l_l, size_t *l_c)
+
+int	ft_sup_r_c(int fd, char **map, t_render *render)
 {
-	int		fd;
-	t_list	*node;
-	t_list	*p_node;
 	char	*line;
 
-	fd = open(path_map, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	line = get_next_line(fd);
-	if (!line)
-	{
-		close(fd);
-		return (1);
-	}
-	node = ft_lstnew(line);
-	(*l_l) = ft_strlen(line) - 1;
-	(*l_c)++;
-	*map =  node;
-	while (line != NULL)
+	while (1)
 	{
 		line = get_next_line(fd);
-		if (line)
-		{
-			(*l_c)++;
-			p_node = ft_lstnew(line);
-			node->next = p_node;
-			node = p_node;
-		}
+		if (!line)
+			break;
+		if (render->len_line == 0)
+			render->len_line = ft_strlen(line) - 1;
+		if ( render->len_line > 0 && line[render->len_line] == '\n')
+			line[render->len_line] = '\0';
+		map[render->len_column] = ft_strdup(line);
+		free(line);
+		render->len_column++;
 	}
-	free(line);
-	close(fd);
+	map[render->len_column++] = NULL;
 	return (0);
 }
 
-int ft_print_map(t_list *map)
+void print_map(char **map)
 {
-	t_list *current_node;
+    int i = 0;
 
-	current_node = map;
-	while (current_node != NULL)
-	{
-        printf("%s", (char *)current_node->content);
-        current_node = current_node->next;
-    }
-    return (0);
-}
-
-t_sprite	*ft_load_textures(void)
-{
-	int			i;
-	int			j;
-	char		paths[4][4];
-	t_sprite	*textures;
-	mlx_texture_t	**sprite;
-
-	i = 0;
-	textures = (t_sprite *)malloc(sizeof(t_sprite) * 1);
-	if (!textures)
-		return (NULL);
-	paths[0][0] = "./assets/floor_up_first.png";
-	paths[0][1] = "./assets/floor_up_md.png";
-	paths[0][2] = "./assets/floor_up_end.png";
-	paths[1][0] = "./assets/floor_md_first.png";
-	paths[1][1] = "./assets/floor_md_end.png";
-	paths[2][0] = "./assets/floor_down_end.png";
-	paths[3][0] = "./assets/floor_base_1.png";
-	paths[3][1] = "./assets/floor_base_2.png";
-	paths[3][2] = "./assets/floor_base_3.png";
-	paths[3][3] = "./assets/floor_base_4.png";
-	textures->width = 64;
-	textures->height = 64;
-	sprite = (mlx_texture_t **)malloc(sizeof(mlx_texture_t *) * 4);
-	if (!sprite)
-		return (NULL);
-	while (i <= 3)
-	{
-		j = 0;
-		while (j <= 3)
-		{
-			if (paths[i][j] != NULL)
-			{
-				sprite[i][j] = mlx_load_png(paths[i][j]);
-				if (!sprite[i][j])
-					return (ft_putstr_fd("[ERR0R] UNABLE TO LOAD TEXTURES.\n", 2), 0);
-				textures->sprite = mlx_texture_to_image(mlx, sprite[i][j]);
-				mlx_delete_texture(sprite[i][j]);
-				if (!textures->sprite[i][j])
-					return (ft_putstr_fd("[ERR0R] UNABLE TO CREATE IMAGES.\n", 2), 0);
-			}
-			j++;
+    while (map[i] != NULL)
+    {
+			printf("%s", map[i]);
+			i++;
 		}
-		i++;
 	}
-	return (textures);
-}
 
-int	ft_render_img_window(mlx_t *mlx, t_list *map, size_t l_l, size_t l_c)
-{
-	t_list	*node;
-
-	node = map;
-	while (node != NULL)
+	char	**ft_read_and_construct_map(char *path_map, t_render *render)
 	{
-		
-		node = node->next;
+		int		fd;
+		char	**map;
+
+		map = (char **)malloc(sizeof(char *) * 100);
+		if (!map)
+		{
+			return (ft_putstr_fd("[ERRO] FAILED ON MEMORY\n", 2), NULL);
+		}
+		fd = open(path_map, O_RDONLY);
+		if (fd == -1)
+		{
+			close(fd);
+			free(map);
+			return (ft_putstr_fd("[ERRO] CANNOT OPEN THE MAP FILES\n", 2), NULL);
+		}
+		if (ft_sup_r_c(fd, map, render) == 1)
+		{
+			free(map);
+			close(fd);
+			return (ft_putstr_fd("[ERRO] THIS FILE IS EMPTY OR INVALID\n", 2), NULL);
+		}
+		close (fd);
+		return (map);
 	}
-}
 
-t_list	*ft_load_map(mlx_t *mlx, char *path_map, t_render *render)
-{
-	t_list		*map;
+	t_sprite	*ft_load_textures(mlx_t *mlx)
+	{
+		int			i;
+		char		*paths[10];
+		t_sprite	*image;
+		mlx_texture_t	*textures[10];
 
-	if (ft_read_map_to_list(&map, path_map, &render->len_line, &render->len_column) == 1)
-		return (NULL);
-	ft_print_map(map); //print gnl readed
-	ft_render_map(mlx, map, &render->len_line, &render->len_column);
-	return (map);
-}
+		i = 0;
+		paths[0] = "./assets/floor_up_first.png";
+		paths[1] = "./assets/floor_up_md.png";
+		paths[2] = "./assets/floor_up_end.png";
+		paths[3] = "./assets/floor_md_first.png";
+		paths[4] = "./assets/floor_md_end.png";
+		paths[5] = "./assets/floor_down_end.png";
+		paths[6] = "./assets/floor_base_1.png";
+		paths[7] = "./assets/floor_base_2.png";
+		paths[8] = "./assets/floor_base_3.png";
+		paths[9] = "./assets/floor_base_4.png";
+		image = (t_sprite *)malloc(sizeof(t_sprite) * 1);
+		if (!image)
+			return (NULL);
+		image->width = 64;
+		image->height = 64;
+		while (i < 10)
+		{
+			textures[i] = mlx_load_png(paths[i]);
+			if (!textures[i])
+				return (ft_putstr_fd("[ERR0R] UNABLE TO LOAD TEXTURES.\n", 2), NULL);
+			image->sprite[i] = mlx_texture_to_image(mlx, textures[i]);
+			mlx_delete_texture(textures[i]);
+			if (!image->sprite[i])
+				return (ft_putstr_fd("[ERR0R] UNABLE TO CREATE IMAGES.\n", 2), NULL);
+			i++;
+		}
+		return (image);
+	}
 
 t_render	*ft_render(char *path_map, mlx_t *mlx)
 {
@@ -141,7 +117,10 @@ t_render	*ft_render(char *path_map, mlx_t *mlx)
 	render = (t_render *)malloc(sizeof(t_render) * 1);
 	if (!render)
 		return (NULL);
-	render->assets = ft_load_textures();
-	render->map = ft_load_map(mlx, path_map, render);
+	render->assets = ft_load_textures(mlx);
+	render->map = ft_read_and_construct_map(path_map, render);
+	print_map(render->map);
+	render->camera = NULL;
 	return (render);
 }
+
