@@ -13,12 +13,10 @@
 #include "render.h"
 //	t_x x = (t_X) {0,0,{0,0}};
 
-int	ft_read_map_to_list(t_list **map, char *path_map, size_t *l_l, size_t *l_c)
+int	ft_read_map_to_list(char **map, char *path_map, size_t *l_l, size_t *l_c)
 {
 	int		fd;
-	t_list	*node;
-	t_list	*p_node;
-	char	*line;
+	char	**line;
 
 	fd = open(path_map, O_RDONLY);
 	if (fd == -1)
@@ -29,22 +27,9 @@ int	ft_read_map_to_list(t_list **map, char *path_map, size_t *l_l, size_t *l_c)
 		close(fd);
 		return (1);
 	}
-	node = ft_lstnew(line);
 	(*l_l) = ft_strlen(line) - 1;
 	(*l_c)++;
-	*map =  node;
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
-		if (line)
-		{
-			(*l_c)++;
-			p_node = ft_lstnew(line);
-			node->next = p_node;
-			node = p_node;
-		}
-	}
-	free(line);
+
 	close(fd);
 	return (0);
 }
@@ -62,75 +47,78 @@ int ft_print_map(t_list *map)
     return (0);
 }
 
-t_sprite	*ft_load_textures(void)
+t_sprite	*ft_load_textures(mlx_t *mlx)
 {
-	int			i;
-	int			j;
-	char		paths[4][4];
-	t_sprite	*textures;
-	mlx_texture_t	**sprite;
+	int				i;
+	t_sprite		*image;
+	char			*paths[9];
+	mlx_texture_t	*textures[9];
 
+
+	image = (t_sprite *)malloc(sizeof(t_sprite));
+	if (!image)
+		 return (NULL);
 	i = 0;
-	textures = (t_sprite *)malloc(sizeof(t_sprite) * 1);
-	if (!textures)
-		return (NULL);
-	paths[0][0] = "./assets/floor_up_first.png";
-	paths[0][1] = "./assets/floor_up_md.png";
-	paths[0][2] = "./assets/floor_up_end.png";
-	paths[1][0] = "./assets/floor_md_first.png";
-	paths[1][1] = "./assets/floor_md_end.png";
-	paths[2][0] = "./assets/floor_down_end.png";
-	paths[3][0] = "./assets/floor_base_1.png";
-	paths[3][1] = "./assets/floor_base_2.png";
-	paths[3][2] = "./assets/floor_base_3.png";
-	paths[3][3] = "./assets/floor_base_4.png";
-	textures->width = 64;
-	textures->height = 64;
-	sprite = (mlx_texture_t **)malloc(sizeof(mlx_texture_t *) * 4);
-	if (!sprite)
-		return (NULL);
-	while (i <= 3)
+	paths[0] = "./assets/floor/floor.png";
+	paths[1] = "./assets/floor/floor_up_first.png";
+	paths[2] = "./assets/floor/floor_up_middle.png";
+	paths[3] = "./assets/floor/floor_up_end.png";
+	paths[4] = "./assets/floor/floor_md_first.png";
+	paths[5] = "./assets/floor/floor_md_end.png";
+	paths[6] = "./assets/floor/floor_down_first.png";
+	paths[7] = "./assets/floor/floor_down_middle.png";
+	paths[8] = "./assets/floor/floor_down_end.png";
+	image->width = 64;
+	image->height = 64;
+	while (i < 9)
 	{
-		j = 0;
-		while (j <= 3)
+		textures[i] = mlx_load_png(paths[i]);
+		if (!textures[i])
 		{
-			if (paths[i][j] != NULL)
-			{
-				sprite[i][j] = mlx_load_png(paths[i][j]);
-				if (!sprite[i][j])
-					return (ft_putstr_fd("[ERR0R] UNABLE TO LOAD TEXTURES.\n", 2), 0);
-				textures->sprite = mlx_texture_to_image(mlx, sprite[i][j]);
-				mlx_delete_texture(sprite[i][j]);
-				if (!textures->sprite[i][j])
-					return (ft_putstr_fd("[ERR0R] UNABLE TO CREATE IMAGES.\n", 2), 0);
-			}
-			j++;
+			free(image);
+			return (ft_putstr_fd("[ERR0R] UNABLE TO LOAD TEXTURES.\n", 2), NULL);
+		}
+		image->sprite[i] = mlx_texture_to_image(mlx, textures[i]);
+		mlx_delete_texture(textures[i]);
+		if (!image->sprite[i])
+		{
+			free(image);
+			return (ft_putstr_fd("[ERR0R] UNABLE TO CREATE IMAGES.\n", 2), NULL);
 		}
 		i++;
 	}
-	return (textures);
+	return (image);
 }
 
-int	ft_render_img_window(mlx_t *mlx, t_list *map, size_t l_l, size_t l_c)
+int	ft_render_img_window(mlx_t *mlx, t_list *map, t_render *render)
 {
+	size_t		l_l;
 	t_list	*node;
 
 	node = map;
 	while (node != NULL)
 	{
-		
+		l_l = 0;
+		while (l_l < render->len_line)
+		{
+			if (((char *)node->content)[l_l] == '1')
+				mlx_image_to_window(mlx, render->assets->sprite[0], l_l * 64, l_l * 64);
+			l_l++;
+		}
 		node = node->next;
 	}
+	return (1);
 }
 
 t_list	*ft_load_map(mlx_t *mlx, char *path_map, t_render *render)
 {
 	t_list		*map;
 
+	(void)mlx;
 	if (ft_read_map_to_list(&map, path_map, &render->len_line, &render->len_column) == 1)
 		return (NULL);
 	ft_print_map(map); //print gnl readed
-	ft_render_map(mlx, map, &render->len_line, &render->len_column);
+	ft_render_img_window(mlx, map, render);
 	return (map);
 }
 
@@ -141,7 +129,7 @@ t_render	*ft_render(char *path_map, mlx_t *mlx)
 	render = (t_render *)malloc(sizeof(t_render) * 1);
 	if (!render)
 		return (NULL);
-	render->assets = ft_load_textures();
+	render->assets = ft_load_textures(mlx);
 	render->map = ft_load_map(mlx, path_map, render);
 	return (render);
 }

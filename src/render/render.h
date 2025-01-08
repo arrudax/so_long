@@ -28,9 +28,9 @@ typedef struct s_position
 
 typedef struct s_sprite
 {
-	mlx_image_t		**sprite;
-	size_t			width;
-	size_t			height;
+	mlx_image_t		*sprite[9];
+	int				width;
+	int				height;
 } t_sprite;
 
 typedef struct s_player
@@ -49,7 +49,7 @@ typedef struct s_camera
 
 typedef struct s_render
 {
-	t_list		*map;
+	char		**map;
 	t_player	*player;
 	t_camera	*camera;
 	t_sprite	*assets;
