@@ -19,14 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "MLX42/MLX42.h"
-
-typedef struct s_render t_render;
-
-typedef struct s_game 
-{
-	mlx_t		*mlx;
-	t_render	*render;
-} t_game;
+# include "controller.h"
 
 void	ft_create_window(t_game *game);
 void	ft_close_window(mlx_key_data_t key, t_game *game);

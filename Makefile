@@ -21,13 +21,17 @@ CMAKE_VERSION		:= 3.16
 SRC_MAIN			:= src/
 SRCS_WINDOW			:= src/window/
 SRCS_RENDER			:= src/render/
+SRCS_VALIDATORS		:= src/validators/
+SRCS_CONTROLLER		:= src/controller/
 INCS				:= includes/ \
 	lib/libft/libft/includes/ \
 	lib/libft/gnl/single_fd/ \
 	lib/libft/gnl/multiple_fd/ \
 	lib/MLX42/include/ \
 	src/window \
-	src/render
+	src/render \
+	src/validators \
+	src/controller
 BUILD_DIR			:= build/
 MLX42_DIR			:= lib/MLX42/
 SRCS_LIBFT			:= lib/libft/
@@ -57,6 +61,10 @@ SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
 	ft_close_window.c)
 
 SOURCE_FILES		+=$(addprefix $(SRCS_RENDER), ft_render_map.c)
+
+SOURCE_FILES		+=$(addprefix $(SRCS_VALIDATORS), ft_check_extension.c)
+
+SOURCE_FILES		+=$(addprefix $(SRCS_CONTROLLER), ft_start_game.c)
 
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(BUILD_DIR)%.o)
 

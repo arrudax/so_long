@@ -46,16 +46,11 @@ void	ft_write_map_to_window(mlx_t *mlx, t_render *render)
 }
 int	main(int argc, char **argv)
 {
-	t_game	game;
-
-	if (argc < 2)
-		return (1);
-	game.mlx = NULL;
-	ft_create_window(&game); // retornar mlx
-	game.render = ft_render(argv[1], game.mlx);
-	ft_write_map_to_window(game.mlx, game.render);
-	mlx_key_hook(game.mlx, (mlx_keyfunc)ft_close_window, &game);
-	mlx_loop(game.mlx);
+	if (argc != 2)
+		return (ft_putstr_fd("Usage: ./so_long <map_file>\n", 2), 1);
+	if (!ft_check_extension(argv[1]))
+		return (ft_putstr_fd("[ERR0R] map must have .ber extension!\n", 2), 1);
+	ft_start_game(argv[1]);
     return (0);
 }
 

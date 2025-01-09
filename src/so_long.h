@@ -14,7 +14,9 @@
 # define SO_LONG_H
 
 # include "libft.h"
+# include "validators.h"
 # include "render.h"
 # include "window.h"
+# include "controller.h"
 
 #endif
