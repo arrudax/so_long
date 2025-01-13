@@ -6,7 +6,7 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:54:01 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/20 12:09:00 by maanton2         ###   ########.org.br   */
+/*   Updated: 2025/01/13 15:25:40 by maanton2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 # define SO_LONG_H
 
 # include "libft.h"
-# include "validators.h"
-# include "render.h"
-# include "window.h"
-# include "controller.h"
 
 #endif

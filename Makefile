@@ -6,7 +6,7 @@
 #    By: maanton2 <maanton2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 05:19:48 by maanton2          #+#    #+#              #
-#    Updated: 2024/12/20 11:05:53 by maanton2         ###   ########.org.br    #
+#    Updated: 2025/01/13 15:24:55 by maanton2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ INCS				:= includes/ \
 	lib/libft/gnl/single_fd/ \
 	lib/libft/gnl/multiple_fd/ \
 	lib/MLX42/include/ \
-	src/window \
-	src/render \
-	src/validators \
-	src/controller
+	#src/window \
+	#src/render \
+	#src/validators \
+	#src/controller
 BUILD_DIR			:= build/
 MLX42_DIR			:= lib/MLX42/
 SRCS_LIBFT			:= lib/libft/
@@ -57,14 +57,8 @@ LIBS				:= ./lib/libft/libft.a \
 
 SOURCE_FILES		+=$(addprefix $(SRC_MAIN), main.c)
 
-SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
+#SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
 	ft_close_window.c)
-
-SOURCE_FILES		+=$(addprefix $(SRCS_RENDER), ft_render_map.c)
-
-SOURCE_FILES		+=$(addprefix $(SRCS_VALIDATORS), ft_check_extension.c)
-
-SOURCE_FILES		+=$(addprefix $(SRCS_CONTROLLER), ft_start_game.c)
 
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(BUILD_DIR)%.o)
 

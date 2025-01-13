@@ -1,0 +1,23 @@
+[
+ {
+  "directory": "/nfs/homes/maanton2/atividades/so_long_pesso",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-Iincludes/",
+   "-Ilib/libft/libft/includes/",
+   "-Ilib/libft/gnl/single_fd/",
+   "-Ilib/libft/gnl/multiple_fd/",
+   "-Ilib/MLX42/include/",
+   "-MMD",
+   "-MP",
+   "-c",
+   "src/main.c",
+   "-o",
+   "build/src/main.o"
+  ],
+  "file": "src/main.c"
+ }
+]
