@@ -6,13 +6,11 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:54:01 by maanton2          #+#    #+#             */
-/*   Updated: 2025/01/13 15:25:40 by maanton2         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:38:04 by maanton2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-# include "libft.h"
 
 #endif

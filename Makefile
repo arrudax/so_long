@@ -6,7 +6,7 @@
 #    By: maanton2 <maanton2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 05:19:48 by maanton2          #+#    #+#              #
-#    Updated: 2025/01/13 15:24:55 by maanton2         ###   ########.fr        #
+#    Updated: 2025/01/13 16:55:30 by maanton2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,6 @@ CMAKE_VERSION		:= 3.16
  
 SRC_MAIN			:= src/
 SRCS_WINDOW			:= src/window/
-SRCS_RENDER			:= src/render/
-SRCS_VALIDATORS		:= src/validators/
-SRCS_CONTROLLER		:= src/controller/
 INCS				:= includes/ \
 	lib/libft/libft/includes/ \
 	lib/libft/gnl/single_fd/ \

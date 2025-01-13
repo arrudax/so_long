@@ -6,7 +6,7 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:42:22 by maanton2          #+#    #+#             */
-/*   Updated: 2025/01/13 15:25:43 by maanton2         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:40:50 by maanton2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # define WIDTH 1920
 # define HEIGHT 995
 
-# include <stdio.h>
-# include <stdlib.h>
 # include "MLX42/MLX42.h"
 
 void	ft_create_window(t_game *game);
