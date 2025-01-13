@@ -9,3 +9,4 @@ run_test
 build/
 .nfs*
 so_long
+.cache
