@@ -6,7 +6,7 @@
 #    By: maanton2 <maanton2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 05:19:48 by maanton2          #+#    #+#              #
-#    Updated: 2025/01/13 16:55:30 by maanton2         ###   ########.fr        #
+#    Updated: 2025/01/14 17:08:07 by maanton2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,15 @@ CMAKE_VERSION		:= 3.16
 # **************************************************************************** #
  
 SRC_MAIN			:= src/
+SRCS_ERRORS			:= src/errors/
 SRCS_WINDOW			:= src/window/
 INCS				:= includes/ \
 	lib/libft/libft/includes/ \
 	lib/libft/gnl/single_fd/ \
 	lib/libft/gnl/multiple_fd/ \
 	lib/MLX42/include/ \
-	#src/window \
-	#src/render \
+	src/errors \
+	src/window
 	#src/validators \
 	#src/controller
 BUILD_DIR			:= build/
@@ -54,7 +55,9 @@ LIBS				:= ./lib/libft/libft.a \
 
 SOURCE_FILES		+=$(addprefix $(SRC_MAIN), main.c)
 
-#SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
+SOURCE_FILES		+=$(addprefix $(SRCS_ERRORS), ft_global_error.c)
+
+SOURCE_FILES		+=$(addprefix $(SRCS_WINDOW), ft_create_window.c \
 	ft_close_window.c)
 
 OBJECT_FILES		:= $(SOURCE_FILES:%.c=$(BUILD_DIR)%.o)

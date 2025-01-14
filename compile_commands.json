@@ -11,6 +11,8 @@
    "-Ilib/libft/gnl/single_fd/",
    "-Ilib/libft/gnl/multiple_fd/",
    "-Ilib/MLX42/include/",
+   "-Isrc/errors",
+   "-Isrc/window",
    "-MMD",
    "-MP",
    "-c",
@@ -19,5 +21,74 @@
    "build/src/main.o"
   ],
   "file": "src/main.c"
+ },
+ {
+  "directory": "/nfs/homes/maanton2/atividades/so_long_pesso",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-Iincludes/",
+   "-Ilib/libft/libft/includes/",
+   "-Ilib/libft/gnl/single_fd/",
+   "-Ilib/libft/gnl/multiple_fd/",
+   "-Ilib/MLX42/include/",
+   "-Isrc/errors",
+   "-Isrc/window",
+   "-MMD",
+   "-MP",
+   "-c",
+   "src/errors/ft_global_error.c",
+   "-o",
+   "build/src/errors/ft_global_error.o"
+  ],
+  "file": "src/errors/ft_global_error.c"
+ },
+ {
+  "directory": "/nfs/homes/maanton2/atividades/so_long_pesso",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-Iincludes/",
+   "-Ilib/libft/libft/includes/",
+   "-Ilib/libft/gnl/single_fd/",
+   "-Ilib/libft/gnl/multiple_fd/",
+   "-Ilib/MLX42/include/",
+   "-Isrc/errors",
+   "-Isrc/window",
+   "-MMD",
+   "-MP",
+   "-c",
+   "src/window/ft_create_window.c",
+   "-o",
+   "build/src/window/ft_create_window.o"
+  ],
+  "file": "src/window/ft_create_window.c"
+ },
+ {
+  "directory": "/nfs/homes/maanton2/atividades/so_long_pesso",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Werror",
+   "-Wextra",
+   "-Iincludes/",
+   "-Ilib/libft/libft/includes/",
+   "-Ilib/libft/gnl/single_fd/",
+   "-Ilib/libft/gnl/multiple_fd/",
+   "-Ilib/MLX42/include/",
+   "-Isrc/errors",
+   "-Isrc/window",
+   "-MMD",
+   "-MP",
+   "-c",
+   "src/window/ft_close_window.c",
+   "-o",
+   "build/src/window/ft_close_window.o"
+  ],
+  "file": "src/window/ft_close_window.c"
  }
 ]

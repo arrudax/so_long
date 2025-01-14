@@ -6,19 +6,13 @@
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:41:15 by maanton2          #+#    #+#             */
-/*   Updated: 2024/12/20 09:32:34 by maanton2         ###   ########.org.br   */
+/*   Updated: 2025/01/14 13:10:46 by maanton2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "window.h"
+#include "../errors/errors.h"
 
-void	ft_create_window(t_game *game)
+void	ft_create_window(void)
 {
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Arrudax_so_long", false);
-	if (!game->mlx)
-	{
-		puts(mlx_strerror(mlx_errno));
-		exit (EXIT_FAILURE);
-	}
+	ft_wirte_error("dont created a window");
 }

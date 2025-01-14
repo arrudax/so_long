@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maanton2 <maanton2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 16:42:22 by maanton2          #+#    #+#             */
-/*   Updated: 2025/01/14 13:12:27 by maanton2         ###   ########.fr       */
+/*   Created: 2025/01/14 12:49:47 by maanton2          #+#    #+#             */
+/*   Updated: 2025/01/14 13:41:23 by maanton2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef WINDOW_H
-# define WINDOW_H
+#ifndef ERRORS_H
+# include "../so_long.h"
 
-# define WIDTH 1920
-# define HEIGHT 995
+int32_t	ft_wirte_error(char *message);
+int32_t	ft_valid_filename(char	*filename);
+
+#endif // !ERRORS_H
 
 
-void	ft_create_window(void);
-void	ft_close_window(void);
-
-#endif
